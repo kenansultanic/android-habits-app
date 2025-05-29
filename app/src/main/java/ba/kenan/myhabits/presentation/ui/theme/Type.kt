@@ -9,7 +9,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import ba.kenan.myhabits.R
 
-
 val helveticaNeue = FontFamily(
     Font(R.font.helvetica_neue_roman, FontWeight.Normal, FontStyle.Normal),
     Font(R.font.helvetica_neue_italic, FontWeight.Normal, FontStyle.Italic),

@@ -1,8 +1,7 @@
 package ba.kenan.myhabits.presentation.ui.navigation
 
-import android.app.Activity
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -26,23 +25,74 @@ fun NavGraph(
         modifier = modifier
     ) {
         composable(route = Screen.Login.route) {
-            LoginScreen()
+            LoginScreen(
+                onLoginButtonClick = {
+                    navController.navigate(Screen.Profile.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
+                    }
+                },
+                navigateToRegistration = {
+                    navController.navigate(Screen.Register.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
+                    }
+                }
+            )
         }
 
         composable(route = Screen.Register.route) {
-            RegisterScreen()
+            RegisterScreen(
+                onRegisterButtonClick = {
+                    navController.navigate(Screen.Profile.route) {
+                        popUpTo(Screen.Register.route) { inclusive = true }
+                    }
+                },
+                navigateToLogin = {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.Register.route) { inclusive = true }
+                    }
+                }
+            )
         }
 
         composable(route = Screen.Profile.route) {
-            ProfileScreen()
+            if (!isLoggedIn) {
+                LaunchedEffect(Unit) {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.Profile.route) { inclusive = true }
+                    }
+                }
+            } else {
+                ProfileScreen()
+            }
         }
 
         composable(route = Screen.Home.route) {
-            HomeScreen()
+            if (!isLoggedIn) {
+                LaunchedEffect(Unit) {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.Home.route) { inclusive = true }
+                    }
+                }
+            } else {
+                HomeScreen(
+                    habits = emptyList(),
+                    onUpdate = {},
+                    onArchive = {},
+                    onDelete = {}
+                )
+            }
         }
 
         composable(route = Screen.Settings.route) {
-            SettingsScreen()
+            if (!isLoggedIn) {
+                LaunchedEffect(Unit) {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.Settings.route) { inclusive = true }
+                    }
+                }
+            } else {
+                SettingsScreen()
+            }
         }
     }
 }

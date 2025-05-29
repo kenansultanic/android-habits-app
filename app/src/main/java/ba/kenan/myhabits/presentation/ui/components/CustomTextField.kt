@@ -20,13 +20,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import ba.kenan.myhabits.R
 import ba.kenan.myhabits.presentation.ui.theme.MyHabitsAppTheme
 import ba.kenan.myhabits.presentation.ui.theme.textFieldUnfocused
-
 
 @Composable
 fun CustomTextField(
@@ -61,11 +61,18 @@ fun CustomTextField(
             },
             trailingIcon = {
                 if (password) {
-
-                    val icon = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff
-                    val description = if (passwordVisible) "Hide password" else "Show password"
+                    val icon =
+                        if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff
+                    val description =
+                        if (passwordVisible) stringResource(R.string.hide_password) else stringResource(
+                            R.string.show_password
+                        )
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                        Icon(imageVector = icon, contentDescription = description)
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = description,
+                            tint = textFieldUnfocused
+                        )
                     }
                 }
             },
