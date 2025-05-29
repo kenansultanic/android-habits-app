@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing -->
+    <dimen name="spacing_default">36dp</dimen>
+    <dimen name="spacing_xxlarge">315dp</dimen>
+    <dimen name="spacing_medium">54dp</dimen>
+    <dimen name="spacing_xmedium">90dp</dimen>
+    <dimen name="spacing_xxmedium">72dp</dimen>
+    <dimen name="spacing_xxxmedium">98dp</dimen>
+    <dimen name="spacing_xxsmall">18dp</dimen>
+    <dimen name="spacing_xsmall">27dp</dimen>
+    <dimen name="spacing_vertical_large">198dp</dimen>
+    <dimen name="spacing_horizontal_large">72dp</dimen>
+    <dimen name="spacing_label">30dp</dimen>
+    <dimen name="spacing_between_labels">44dp</dimen>
+    <dimen name="spacing_vertical_xsmall">8dp</dimen>
+    <dimen name="spacing_vertical_small">12dp</dimen>
+    <dimen name="spacing_horizontal_small">12dp</dimen>
+    <dimen name="spacing_vertical_xxsmall">4dp</dimen>
+    <dimen name="spacing_vertical_medium">24dp</dimen>
+    <dimen name="spacing_horizontal_xsmall">22dp</dimen>
+    <dimen name="spacing_xxssmall">5dp</dimen>
+
+    <!-- Icon -->
+    <dimen name="icon_size_large">315dp</dimen>
+    <dimen name="icon_size_xxlarge">144dp</dimen>
+    <dimen name="icon_size_medium">90dp</dimen>
+    <dimen name="icon_size_small">72dp</dimen>
+    <dimen name="icon_size_xsmall">24dp</dimen>
+    <dimen name="icon_size_xxsmall">18dp</dimen>
+    <dimen name="icon_size_xxxsmall">5dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_default">36dp</dimen>
+    <dimen name="padding_small">18dp</dimen>
+    <dimen name="padding_medium">54dp</dimen>
+    <dimen name="top_padding">198dp</dimen>
+    <dimen name="padding_xsmall">9dp</dimen>
+    <dimen name="start_padding">72dp</dimen>
+    <dimen name="padding_horizontal_medium">16dp</dimen>
+    <dimen name="padding_vertical_medium">20dp</dimen>
+    <dimen name="padding_vertical_default">22dp</dimen>
+    <dimen name="padding_horizontal_xmedium">63dp</dimen>
+    <dimen name="padding_smallxx">18dp</dimen>
+
+    <!-- Component -->
+    <dimen name="component_width_large">629dp</dimen>
+    <dimen name="component_height_large">1062dp</dimen>
+    <dimen name="component_width_medium">752dp</dimen>
+    <dimen name="component_height_medium">144dp</dimen>
+
+    <!-- Height -->
+    <dimen name="height_small">9dp</dimen>
+    <dimen name="height_medium">18dp</dimen>
+    <dimen name="height_medium_large">36dp</dimen>
+    <dimen name="height_large">54dp</dimen>
+    <dimen name="height_xx_large">342dp</dimen>
+    <dimen name="height_xxlarge">112dp</dimen>
+
+    <!-- Width -->
+    <dimen name="large_height">315dp</dimen>
+    <dimen name="medium_height">90dp</dimen>
+    <dimen name="small_height">72dp</dimen>
+    <dimen name="xsmall_height">24dp</dimen>
+    <dimen name="xx_small_height">16dp</dimen>
+    <dimen name="height_xmedium">112dp</dimen>
+
+    <!-- Width -->
+    <dimen name="xxx_small_width">4dp</dimen>
+    <dimen name="xx_small_width">8dp</dimen>
+    <dimen name="width_xxlarge">428dp</dimen>
+
+    <!-- Misc -->
+    <dimen name="border_thin">3dp</dimen>
+    <dimen name="divider_thin">0.8dp</dimen>
+    <dimen name="circle_size_large">147dp</dimen>
+    <dimen name="circle_size_medium">126dp</dimen>
+    <dimen name="box_height_small">5dp</dimen>
+    <dimen name="icon_spacing">8dp</dimen>
+    <dimen name="profile_icon_size">40dp</dimen>
+    <dimen name="bottom_height">98dp</dimen>
+    <dimen name="button_padding">36dp</dimen>
+    <dimen name="small_button_height">76dp</dimen>
+    <dimen name="small_button_width">140dp</dimen>
+    <dimen name="rounded_corner">18dp</dimen>
+    <dimen name="rounded_corner_small">4dp</dimen>
+    <dimen name="box_width">652dp</dimen>
+    <dimen name="box_height">1062dp</dimen>
+    <dimen name="text_field_height">108dp</dimen>
+    <dimen name="shadow_default">9dp</dimen>
+    <dimen name="offset_default">36dp</dimen>
+    <dimen name="shadow_small">9dp</dimen>
+</resources>
