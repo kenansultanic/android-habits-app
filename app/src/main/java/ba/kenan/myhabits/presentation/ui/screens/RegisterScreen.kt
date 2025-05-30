@@ -40,11 +40,11 @@ import java.util.Date
 
 @Composable
 fun RegisterScreen(
+    viewModel: RegisterViewModel,
     onRegisterButtonClick: () -> Unit,
     navigateToLogin: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val viewModel: RegisterViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var nameState by remember { mutableStateOf(TextFieldValue("")) }
     var emailState by remember { mutableStateOf(TextFieldValue("")) }

@@ -1,13 +1,19 @@
 package ba.kenan.myhabits.presentation.viewmodels.login
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import ba.kenan.myhabits.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
-
-    private val auth = FirebaseAuth.getInstance()
+@HiltViewModel
+class LoginViewModel @Inject constructor (
+    private val authRepository: AuthRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Init)
     val uiState: StateFlow<LoginUiState> = _uiState
@@ -15,13 +21,14 @@ class LoginViewModel : ViewModel() {
     fun loginUser(email: String, password: String) {
         _uiState.value = LoginUiState.Loading
 
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener {
-                _uiState.value = LoginUiState.Success
-            }
-            .addOnFailureListener { e ->
-                _uiState.value = LoginUiState.Failure(e)
-            }
+        viewModelScope.launch {
+            val result = authRepository.loginUser(email, password)
+
+            _uiState.value = result.fold(
+                onSuccess = { LoginUiState.Success },
+                onFailure = { LoginUiState.Failure(it) }
+            )
+        }
     }
 
     fun resetState() {

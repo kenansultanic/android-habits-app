@@ -3,6 +3,7 @@ package ba.kenan.myhabits.presentation.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,6 +27,7 @@ fun NavGraph(
     ) {
         composable(route = Screen.Login.route) {
             LoginScreen(
+                viewModel = hiltViewModel(),
                 onLoginButtonClick = {
                     navController.navigate(Screen.Profile.route) {
                         popUpTo(Screen.Login.route) { inclusive = true }
@@ -41,6 +43,7 @@ fun NavGraph(
 
         composable(route = Screen.Register.route) {
             RegisterScreen(
+                viewModel = hiltViewModel(),
                 onRegisterButtonClick = {
                     navController.navigate(Screen.Profile.route) {
                         popUpTo(Screen.Register.route) { inclusive = true }

@@ -38,11 +38,11 @@ import ba.kenan.myhabits.presentation.viewmodels.login.LoginViewModel
 
 @Composable
 fun LoginScreen(
+    viewModel: LoginViewModel,
     onLoginButtonClick: () -> Unit,
     navigateToRegistration: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val viewModel: LoginViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     var emailState by remember { mutableStateOf(TextFieldValue("")) }
