@@ -115,7 +115,7 @@ private fun RegisterScreen(
                 fontSize = 60.sp
             )
         )
-        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_xxlarge)))
+        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_xxmedium)))
         Text(
             text = stringResource(R.string.welcome),
             style = MaterialTheme.typography.titleLarge
