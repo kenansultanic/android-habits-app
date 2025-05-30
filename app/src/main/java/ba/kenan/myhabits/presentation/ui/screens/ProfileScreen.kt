@@ -12,14 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,9 +28,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ba.kenan.myhabits.R
-import ba.kenan.myhabits.domain.models.Frequency
-import ba.kenan.myhabits.domain.models.Habit
-import ba.kenan.myhabits.domain.models.UserProfile
+import ba.kenan.myhabits.domain.model.Frequency
+import ba.kenan.myhabits.domain.model.Habit
+import ba.kenan.myhabits.domain.model.UserProfile
 import ba.kenan.myhabits.presentation.ui.components.ImageBox
 import ba.kenan.myhabits.presentation.ui.components.LoadingComponent
 import ba.kenan.myhabits.presentation.ui.theme.MyHabitsAppTheme

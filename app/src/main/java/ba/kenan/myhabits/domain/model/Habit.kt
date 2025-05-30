@@ -1,6 +1,5 @@
-package ba.kenan.myhabits.domain.models
+package ba.kenan.myhabits.domain.model
 
-import java.sql.Timestamp
 import java.util.Date
 
 data class Habit(

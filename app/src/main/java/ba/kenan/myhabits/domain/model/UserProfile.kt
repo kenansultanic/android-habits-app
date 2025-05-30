@@ -1,4 +1,4 @@
-package ba.kenan.myhabits.domain.models
+package ba.kenan.myhabits.domain.model
 
 import java.util.Date
 

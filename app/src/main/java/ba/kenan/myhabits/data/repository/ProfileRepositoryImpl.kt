@@ -1,8 +1,8 @@
 package ba.kenan.myhabits.data.repository
 
-import ba.kenan.myhabits.domain.models.Frequency
-import ba.kenan.myhabits.domain.models.Habit
-import ba.kenan.myhabits.domain.models.UserProfile
+import ba.kenan.myhabits.domain.model.Frequency
+import ba.kenan.myhabits.domain.model.Habit
+import ba.kenan.myhabits.domain.model.UserProfile
 import ba.kenan.myhabits.domain.repository.ProfileRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await

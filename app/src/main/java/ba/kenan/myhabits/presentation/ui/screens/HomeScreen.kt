@@ -1,6 +1,5 @@
 package ba.kenan.myhabits.presentation.ui.screens
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AssistChip
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
@@ -43,8 +41,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ba.kenan.myhabits.R
-import ba.kenan.myhabits.domain.models.Frequency
-import ba.kenan.myhabits.domain.models.Habit
+import ba.kenan.myhabits.domain.model.Frequency
+import ba.kenan.myhabits.domain.model.Habit
 import ba.kenan.myhabits.presentation.ui.theme.MyHabitsAppTheme
 import ba.kenan.myhabits.presentation.utils.DevicesPreview
 import java.sql.Timestamp

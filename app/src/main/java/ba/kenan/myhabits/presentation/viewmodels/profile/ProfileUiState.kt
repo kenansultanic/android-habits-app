@@ -1,6 +1,6 @@
 package ba.kenan.myhabits.presentation.viewmodels.profile
 
-import ba.kenan.myhabits.domain.models.UserProfile
+import ba.kenan.myhabits.domain.model.UserProfile
 
 sealed class ProfileUiState {
     data object Loading : ProfileUiState()
