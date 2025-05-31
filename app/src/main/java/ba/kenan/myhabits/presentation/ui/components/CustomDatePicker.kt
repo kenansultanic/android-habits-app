@@ -79,7 +79,7 @@ fun CustomDatePicker(
         ) {
             Icon(
                 imageVector = Icons.Default.DateRange,
-                contentDescription = stringResource(R.string.date_pick_arrow),
+                contentDescription = stringResource(R.string.calendar_icon),
                 tint = lightGrey,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(id = R.dimen.padding_default),

@@ -23,4 +23,13 @@
     <string name="hide_password">Hide password</string>
     <string name="show_password">Show password</string>
     <string name="myhabits">MyHabits</string>
+    <string name="calendar_icon">Calendar icon</string>
+    <string name="habit_name_placeholder">Habit name</string>
+    <string name="habit_tags_placeholder">Tags (e.g. health, fitness)</string>
+    <string name="habit_frequency_type">Frequency type</string>
+    <string name="habit_frequency_days">Frequency days</string>
+    <string name="select_frequency_type">Select frequency type</string>
+    <string name="select_days">Select days</string>
+    <string name="select_day">Select day</string>
+    <string name="save_button">Save</string>
 </resources>

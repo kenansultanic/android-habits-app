@@ -5,14 +5,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import ba.kenan.myhabits.presentation.ui.screens.AddHabitScreen
+import ba.kenan.myhabits.presentation.ui.screens.EditHabitScreen
 import ba.kenan.myhabits.presentation.ui.screens.HomeScreen
 import ba.kenan.myhabits.presentation.ui.screens.LoginScreen
 import ba.kenan.myhabits.presentation.ui.screens.ProfileScreen
 import ba.kenan.myhabits.presentation.ui.screens.RegisterScreen
 import ba.kenan.myhabits.presentation.ui.screens.SettingsScreen
-
 
 @Composable
 fun NavGraph(
@@ -78,10 +81,11 @@ fun NavGraph(
                 }
             } else {
                 HomeScreen(
-                    habits = emptyList(),
-                    onUpdate = {},
-                    onArchive = {},
-                    onDelete = {}
+                    viewModel = hiltViewModel(),
+                    onAddNewHabitClick = { navController.navigate(Screen.AddHabit.route) },
+                    onUpdateHabitClick = { habitId ->
+                        navController.navigate(Screen.EditHabit.createRoute(habitId))
+                    }
                 )
             }
         }
@@ -95,6 +99,41 @@ fun NavGraph(
                 }
             } else {
                 SettingsScreen()
+            }
+        }
+
+        composable(Screen.AddHabit.route) {
+            if (!isLoggedIn) {
+                LaunchedEffect(Unit) {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.Settings.route) { inclusive = true }
+                    }
+                }
+            } else {
+                AddHabitScreen(
+                    viewModel = hiltViewModel(),
+                    onHabitAdded = { navController.popBackStack() }
+                )
+            }
+        }
+
+        composable(
+            route = Screen.EditHabit.route,
+            arguments = listOf(navArgument("habitId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            if (!isLoggedIn) {
+                LaunchedEffect(Unit) {
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.Settings.route) { inclusive = true }
+                    }
+                }
+            } else {
+                val habitId = backStackEntry.arguments?.getString("habitId") ?: ""
+                EditHabitScreen(
+                    viewModel = hiltViewModel(),
+                    habitId = habitId,
+                    onHabitEdited = { navController.popBackStack() }
+                )
             }
         }
     }

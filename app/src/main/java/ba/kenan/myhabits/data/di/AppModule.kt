@@ -1,8 +1,10 @@
 package ba.kenan.myhabits.data.di
 
 import ba.kenan.myhabits.data.repository.AuthRepositoryImpl
+import ba.kenan.myhabits.data.repository.HabitRepositoryImpl
 import ba.kenan.myhabits.data.repository.ProfileRepositoryImpl
 import ba.kenan.myhabits.domain.repository.AuthRepository
+import ba.kenan.myhabits.domain.repository.HabitRepository
 import ba.kenan.myhabits.domain.repository.ProfileRepository
 import dagger.Module
 import dagger.Provides
@@ -24,5 +26,11 @@ object AppModule {
     @Singleton
     fun provideProfileRepository(): ProfileRepository {
         return ProfileRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideHabitRepository(): HabitRepository {
+        return HabitRepositoryImpl()
     }
 }
