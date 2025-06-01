@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -42,6 +44,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -122,7 +125,10 @@ private fun HomeScreen(
 ) {
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddNewHabitClick) {
+            FloatingActionButton(
+                onClick = onAddNewHabitClick,
+                shape = CircleShape
+            ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = stringResource(R.string.add_habit)
@@ -133,12 +139,11 @@ private fun HomeScreen(
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(paddingValues)
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 10.dp),
+                    .padding(start = 16.dp, end = 16.dp, bottom = 10.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -151,7 +156,6 @@ private fun HomeScreen(
                     onCheckedChange = setShowArchived
                 )
             }
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -168,14 +172,16 @@ private fun HomeScreen(
                     onCheckedChange = setShowCompleted
                 )
             }
-
             Spacer(modifier = Modifier.height(8.dp))
-
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                contentPadding = PaddingValues(
+                    top = paddingValues.calculateTopPadding(),
+                    bottom = paddingValues.calculateBottomPadding()
+                )
             ) {
                 items(
                     items = habits,
@@ -290,14 +296,14 @@ private fun HabitCard(
                         label = { Text("...") }
                     )
                 }
-                if ( isActiveToday && !alreadyCompleted && !habit.isArchived) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Button(
-                        onClick = { onMarkAsCompleted(habit.id) },
-                        modifier = Modifier
-                    ) {
-                        Text("Mark as done")
-                    }
+            }
+            if ( isActiveToday && !alreadyCompleted && !habit.isArchived) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(
+                    onClick = { onMarkAsCompleted(habit.id) },
+                    modifier = Modifier
+                ) {
+                    Text("Mark as done")
                 }
             }
             AnimatedVisibility(visible = expanded) {
@@ -316,11 +322,12 @@ private fun HabitCard(
 
                 Column(modifier = Modifier.padding(top = 12.dp)) {
                     Text(
-                        text = "Last week: $weeklyCompletions completions",
+                        text = "This week: $weeklyCompletions completions",
                         style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
                     )
+                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.height_small)))
                     Text(
-                        text = "Last month: $monthlyCompletions completions",
+                        text = "This month: $monthlyCompletions completions",
                         style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
                     )
                 }

@@ -1,5 +1,6 @@
 package ba.kenan.myhabits.presentation.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,10 +25,11 @@ fun CustomSnackbar(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = dimensionResource(id = R.dimen.padding_default))
+            .background(color = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Text(
             text = snackbarData.visuals.message,
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodySmall.copy(color = MaterialTheme.colorScheme.onSecondaryContainer),
             modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_default))
         )
     }
@@ -48,6 +50,7 @@ private fun CustomSnackbarSnackbarPreview() {
                 override val message: String
                     get() = "Login failed!"
             }
+
         override fun dismiss() {}
         override fun performAction() {}
     }
