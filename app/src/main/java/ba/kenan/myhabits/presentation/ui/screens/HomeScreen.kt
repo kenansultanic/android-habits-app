@@ -54,7 +54,6 @@ import ba.kenan.myhabits.presentation.utils.DevicesPreview
 import ba.kenan.myhabits.presentation.viewmodels.home.HomeUiState
 import ba.kenan.myhabits.presentation.viewmodels.home.HomeViewModel
 import com.google.firebase.auth.FirebaseAuth
-import java.sql.Timestamp
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
@@ -136,7 +135,6 @@ private fun HomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Filter toggles
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -303,9 +301,26 @@ private fun HabitCard(
                 }
             }
             AnimatedVisibility(visible = expanded) {
+                val formatter = DateTimeFormatter.ISO_DATE
+                val localDate = LocalDate.now()
+                val startOfWeek = localDate.minusDays(7)
+                val startOfMonth = localDate.withDayOfMonth(1)
+
+                val weeklyCompletions = habit.history
+                    .filterKeys { LocalDate.parse(it, formatter).isAfter(startOfWeek) }
+                    .count { it.value }
+
+                val monthlyCompletions = habit.history
+                    .filterKeys { LocalDate.parse(it, formatter).isAfter(startOfMonth.minusDays(1)) }
+                    .count { it.value }
+
                 Column(modifier = Modifier.padding(top = 12.dp)) {
                     Text(
-                        text = "Detalji navike (placeholder)",
+                        text = "Last week: $weeklyCompletions completions",
+                        style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
+                    )
+                    Text(
+                        text = "Last month: $monthlyCompletions completions",
                         style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
                     )
                 }
@@ -324,7 +339,7 @@ private fun HomeScreenPreview() {
                     name = "Running",
                     tags = listOf("health", "fitness"),
                     isArchived = false,
-                    createdAt = Timestamp(Date().time),
+                    createdAt = Date(),
                     frequency = Frequency(
                         type = "Weekly",
                         days = listOf(1, 3, 5)
@@ -334,7 +349,7 @@ private fun HomeScreenPreview() {
                     name = "Reading",
                     tags = listOf("personal growth", "education"),
                     isArchived = false,
-                    createdAt = Timestamp(Date().time),
+                    createdAt = Date(),
                     frequency = Frequency(
                         type = "Daily",
                         days = emptyList()
@@ -344,7 +359,7 @@ private fun HomeScreenPreview() {
                     name = "Meditation",
                     tags = listOf("mindfulness", "mental health"),
                     isArchived = false,
-                    createdAt = Timestamp(Date().time),
+                    createdAt = Date(),
                     frequency = Frequency(
                         type = "Custom",
                         days = listOf(0, 6)
@@ -354,7 +369,7 @@ private fun HomeScreenPreview() {
                     name = "Learning Kotlin",
                     tags = listOf("programming", "career", "learning"),
                     isArchived = false,
-                    createdAt = Timestamp(Date().time),
+                    createdAt = Date(),
                     frequency = Frequency(
                         type = "Weekly",
                         days = listOf(2, 4)

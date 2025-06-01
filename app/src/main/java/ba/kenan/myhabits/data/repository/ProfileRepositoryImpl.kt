@@ -20,27 +20,41 @@ class ProfileRepositoryImpl : ProfileRepository {
         val timezone = userSnapshot.getString("timezone") ?: ""
         val joinedOn = userSnapshot.getTimestamp("joinedOn")?.toDate() ?: Date()
 
-        val habitsSnapshot = firestore.collection("habits")
-            .whereEqualTo("userId", userId).get().await()
+        val habitsSnapshot = firestore
+            .collection("users")
+            .document(userId)
+            .collection("habits")
+            .get()
+            .await()
 
-        val habits = habitsSnapshot.documents.map { doc ->
+        val habits = habitsSnapshot.documents.mapNotNull { doc ->
+            val data = doc.data ?: return@mapNotNull null
             val id = doc.id
-            val fullName = doc.getString("name") ?: ""
-            val tags = doc.get("tags") as? List<String> ?: emptyList()
-            val isArchived = doc.getBoolean("isArchived") ?: false
-            val createdAt = doc.getTimestamp("createdAt")?.toDate() ?: Date()
-            val freqMap = doc.get("frequency") as? Map<*, *>
+
+            val fullName = data["name"] as? String ?: ""
+            val tags = data["tags"] as? List<String> ?: emptyList()
+            val isArchived = data["isArchived"] as? Boolean ?: false
+            val createdAt = (data["createdAt"] as? com.google.firebase.Timestamp)?.toDate() ?: Date()
+
+            val freqMap = data["frequency"] as? Map<*, *>
             val frequency = Frequency(
                 type = freqMap?.get("type") as? String ?: "",
                 days = (freqMap?.get("days") as? List<Long>)?.map { it.toInt() } ?: emptyList()
             )
 
-            val historyMap = mutableMapOf<String, Boolean>()
-            val historySnapshot = firestore.collection("habits")
-                .document(id).collection("history").get().await()
-            for (historyDoc in historySnapshot.documents) {
+            val historySnapshot = firestore
+                .collection("users")
+                .document(userId)
+                .collection("habits")
+                .document(id)
+                .collection("history")
+                .get()
+                .await()
+
+            val historyMap = historySnapshot.documents.associate { historyDoc ->
+                val date = historyDoc.id
                 val completed = historyDoc.getBoolean("completed") ?: false
-                historyMap[historyDoc.id] = completed
+                date to completed
             }
 
             Habit(id, fullName, tags, frequency, isArchived, createdAt, historyMap)

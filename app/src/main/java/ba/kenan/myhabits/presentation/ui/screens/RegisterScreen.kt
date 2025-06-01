@@ -61,7 +61,8 @@ fun RegisterScreen(
         }
 
         is RegisterUiState.Failure -> {
-            Log.e("Register", "Greška pri registraciji", (uiState as RegisterUiState.Failure).error)
+            Log.e("Register", "Registration error", (uiState as RegisterUiState.Failure).error)
+            viewModel.resetState()
         }
 
         RegisterUiState.Init -> {

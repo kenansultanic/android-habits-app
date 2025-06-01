@@ -48,7 +48,6 @@ class HabitRepositoryImpl : HabitRepository {
         }
     }
 
-
     override suspend fun addHabit(
         userId: String,
         name: String,

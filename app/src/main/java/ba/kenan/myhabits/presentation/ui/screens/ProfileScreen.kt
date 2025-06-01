@@ -1,6 +1,7 @@
 package ba.kenan.myhabits.presentation.ui.screens
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,9 +21,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,12 +37,14 @@ import ba.kenan.myhabits.domain.model.Frequency
 import ba.kenan.myhabits.domain.model.Habit
 import ba.kenan.myhabits.domain.model.UserProfile
 import ba.kenan.myhabits.presentation.ui.components.ImageBox
+import ba.kenan.myhabits.presentation.ui.components.InfoCard
 import ba.kenan.myhabits.presentation.ui.components.LoadingComponent
 import ba.kenan.myhabits.presentation.ui.theme.MyHabitsAppTheme
 import ba.kenan.myhabits.presentation.ui.theme.fontBlack
 import ba.kenan.myhabits.presentation.ui.theme.fontDarkGrey
 import ba.kenan.myhabits.presentation.ui.theme.fontGrey
 import ba.kenan.myhabits.presentation.utils.DevicesPreview
+import ba.kenan.myhabits.presentation.utils.calculateHabitStatistics
 import ba.kenan.myhabits.presentation.viewmodels.profile.ProfileUiState
 import ba.kenan.myhabits.presentation.viewmodels.profile.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -56,6 +63,7 @@ fun ProfileScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val userId = FirebaseAuth.getInstance().currentUser?.uid
+    val context = LocalContext.current
 
     LaunchedEffect(userId) {
         userId?.let { viewModel.loadProfile(it) }
@@ -68,6 +76,7 @@ fun ProfileScreen(
         }
         is ProfileUiState.Success -> {
             val profile = (uiState as ProfileUiState.Success).profile
+
             val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val joinedOn = formatter.format(profile.joinedOn)
             val birthLocalDate = profile.birthDate.toInstant()
@@ -77,6 +86,19 @@ fun ProfileScreen(
             val age = ChronoUnit.YEARS.between(birthLocalDate, today).toString()
             val nameParts = profile.name.trim().split(" ")
             val initials = nameParts.take(2).map { it.first().uppercaseChar() }.joinToString("")
+            var hasShownMotivation by remember { mutableStateOf(false) }
+
+            LaunchedEffect(Unit) {
+                if (!hasShownMotivation && viewModel.shouldShowMotivation(profile.habits)) {
+                    hasShownMotivation = true
+                    Toast.makeText(
+                        context,
+                        "Znaš da ti ${today.dayOfWeek.name.lowercase().replaceFirstChar { it.uppercase() }} teško padaju - danas napravi mali korak. Možeš ti to!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
             ProfileScreen(
                 profile = profile,
                 age = age,
@@ -96,26 +118,28 @@ private fun ProfileScreen(
     joinedOn: String,
     modifier: Modifier = Modifier
 ) {
+    val (totalCompleted, streak) = calculateHabitStatistics(profile.habits)
+
+    val informationItems = listOf(
+        "Name" to profile.name,
+        "Email" to profile.email,
+        "Timezone" to profile.timezone,
+        "Age" to age,
+        "Joined" to joinedOn
+    )
+
+    val statisticsItems = listOf(
+        "Completed days" to totalCompleted.toString(),
+        "Current streak" to "$streak day${if (streak == 1) "" else "s"}",
+        "Total habits" to profile.habits.size.toString()
+    )
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        /*Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconButton(onClick = {}) {
-                Icon(Icons.Default.Menu, contentDescription = null)
-            }
-            IconButton(onClick = {}) {
-                Icon(Icons.Default.MoreVert, contentDescription = null)
-            }
-        }*/
-
         Spacer(modifier = Modifier.height(32.dp))
-
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
@@ -127,85 +151,10 @@ private fun ProfileScreen(
                 style = MaterialTheme.typography.headlineSmall,
                 color = Color.Black
             )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "Neki tekst",
-                style = MaterialTheme.typography.bodyMedium,
-                color = fontGrey
-            )
         }
-
         Spacer(modifier = Modifier.height(40.dp))
-
-        Text(
-            text = stringResource(R.string.information),
-            style = MaterialTheme.typography.titleMedium,
-            color = fontDarkGrey,
-            modifier = Modifier.padding(start = 28.dp)
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 4.dp, horizontal = 24.dp,),
-            shape = RoundedCornerShape(12.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFFF8F8F8))
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                InfoItem("Name", profile.name)
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    thickness = 0.7.dp,
-                    color = fontGrey.copy(alpha = 0.4f)
-                )
-                InfoItem("Email", profile.email)
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    thickness = 0.7.dp,
-                    color = fontGrey.copy(alpha = 0.4f)
-                )
-                InfoItem("Timezone", profile.timezone)
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    thickness = 0.7.dp,
-                    color = fontGrey.copy(alpha = 0.4f)
-                )
-                InfoItem("Age", age)
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    thickness = 0.7.dp,
-                    color = fontGrey.copy(alpha = 0.4f)
-                )
-                InfoItem("Joined", joinedOn)
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    thickness = 0.7.dp,
-                    color = fontGrey.copy(alpha = 0.4f)
-                )
-                InfoItem("Total habits", profile.habits.size.toString())
-            }
-        }
-    }
-}
-
-@Composable
-private fun InfoItem(label: String, value: String) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.Top
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyMedium.copy(color = fontGrey, fontSize = 20.sp)
-        )
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodyMedium.copy(color = fontBlack, fontSize = 20.sp)
-        )
+        InfoCard(title = "Information", items = informationItems)
+        InfoCard(title = "Statistics", items = statisticsItems)
     }
 }
 
