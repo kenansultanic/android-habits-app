@@ -1,26 +1,19 @@
 package ba.kenan.myhabits.presentation.ui.screens
 
 import android.util.Log
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -29,7 +22,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import ba.kenan.myhabits.R
 import ba.kenan.myhabits.presentation.ui.components.ClickableTextPrompt
 import ba.kenan.myhabits.presentation.ui.components.CustomButton
@@ -108,19 +100,16 @@ private fun LoginForm(
             )
         )
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_xxlarge)))
-
         Text(
             text = stringResource(R.string.welcome),
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_xmedium)))
-
         Text(
             text = stringResource(R.string.in_order_to_use_this_app_you_will_need_to_login),
             style = MaterialTheme.typography.headlineMedium
         )
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_xxxmedium)))
-
         CustomTextField(
             text = email,
             placeholder = stringResource(R.string.email_placeholder),
@@ -142,7 +131,6 @@ private fun LoginForm(
                 .padding(vertical = 4.dp)
         )
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_xxxmedium)))
-
         ClickableTextPrompt(
             onTextClick = navigateToRegistration,
             firstText = "Don't have an account? ",
