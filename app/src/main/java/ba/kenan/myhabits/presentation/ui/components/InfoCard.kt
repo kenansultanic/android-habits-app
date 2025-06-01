@@ -34,7 +34,6 @@ fun InfoCard(
     Text(
         text = title,
         style = MaterialTheme.typography.titleMedium,
-        color = fontDarkGrey,
         modifier = Modifier.padding(start = 28.dp, top = 28.dp)
     )
     Spacer(modifier = Modifier.height(12.dp))
@@ -43,8 +42,7 @@ fun InfoCard(
             .fillMaxWidth()
             .padding(vertical = 4.dp, horizontal = 24.dp),
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFF8F8F8))
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             items.forEachIndexed { index, (label, value) ->
@@ -70,11 +68,17 @@ private fun InfoItem(label: String, value: String) {
     ) {
         Text(
             text = label,
-            style = MaterialTheme.typography.bodyMedium.copy(color = fontGrey, fontSize = 20.sp)
+            style = MaterialTheme.typography.bodyMedium.copy(
+                color = fontGrey,
+                fontSize = 20.sp
+            )
         )
         Text(
             text = value,
-            style = MaterialTheme.typography.bodyMedium.copy(color = fontBlack, fontSize = 20.sp)
+            style = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 20.sp
+            )
         )
     }
 }

@@ -20,14 +20,11 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -39,15 +36,12 @@ import androidx.navigation.compose.rememberNavController
 import ba.kenan.myhabits.R
 import ba.kenan.myhabits.presentation.ui.components.CustomSnackbar
 import ba.kenan.myhabits.presentation.ui.navigation.NavGraph
-import ba.kenan.myhabits.presentation.ui.navigation.NavigationBar
+import ba.kenan.myhabits.presentation.ui.navigation.CustomNavigationBar
 import ba.kenan.myhabits.presentation.ui.navigation.NavigationItems
 import ba.kenan.myhabits.presentation.ui.navigation.Screen
 import ba.kenan.myhabits.presentation.utils.ObserveAsEvents
-import ba.kenan.myhabits.presentation.utils.SnackbarController
 import ba.kenan.myhabits.presentation.viewmodels.main.MainViewModel
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -129,7 +123,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
         },
         bottomBar = {
             if (showBottomBar) {
-                NavigationBar(
+                CustomNavigationBar(
                     items = NavigationItems.items,
                     selectedItemIndex = selectedItemIndex,
                     onItemSelected = { index ->

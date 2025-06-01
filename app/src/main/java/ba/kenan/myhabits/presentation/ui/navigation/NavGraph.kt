@@ -9,6 +9,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import ba.kenan.myhabits.presentation.ui.screens.AboutScreen
 import ba.kenan.myhabits.presentation.ui.screens.AddHabitScreen
 import ba.kenan.myhabits.presentation.ui.screens.EditHabitScreen
 import ba.kenan.myhabits.presentation.ui.screens.HomeScreen
@@ -93,12 +94,20 @@ fun NavGraph(
         composable(route = Screen.Settings.route) {
             if (!isLoggedIn) {
                 LaunchedEffect(Unit) {
-                    navController.navigate(Screen.Login.route) {
-                        popUpTo(Screen.Settings.route) { inclusive = true }
-                    }
+                    navController.navigate(Screen.Login.route)
                 }
             } else {
                 SettingsScreen()
+            }
+        }
+
+        composable(route = Screen.About.route) {
+            if (!isLoggedIn) {
+                LaunchedEffect(Unit) {
+                    navController.navigate(Screen.About.route)
+                }
+            } else {
+                AboutScreen()
             }
         }
 

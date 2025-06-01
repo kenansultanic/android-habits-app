@@ -40,7 +40,8 @@ fun ClickableTextPrompt(
         text = annotatedText,
         style = MaterialTheme.typography.headlineMedium.copy(
             fontWeight = FontWeight.Light,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onBackground
         ),
         modifier = Modifier.fillMaxWidth(),
         onClick = { offset ->

@@ -39,13 +39,6 @@ fun CustomButton(
         enabled = isEnabled,
         shape = shape,
         contentPadding = contentPadding,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        ),
-        border = BorderStroke(dimensionResource(id = R.dimen.border_thin), borderColor),
         modifier = modifier
     ) {
         Text(

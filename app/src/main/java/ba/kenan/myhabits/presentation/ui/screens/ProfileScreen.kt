@@ -2,20 +2,13 @@ package ba.kenan.myhabits.presentation.ui.screens
 
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,11 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import ba.kenan.myhabits.R
 import ba.kenan.myhabits.domain.model.Frequency
 import ba.kenan.myhabits.domain.model.Habit
 import ba.kenan.myhabits.domain.model.UserProfile
@@ -40,9 +30,6 @@ import ba.kenan.myhabits.presentation.ui.components.ImageBox
 import ba.kenan.myhabits.presentation.ui.components.InfoCard
 import ba.kenan.myhabits.presentation.ui.components.LoadingComponent
 import ba.kenan.myhabits.presentation.ui.theme.MyHabitsAppTheme
-import ba.kenan.myhabits.presentation.ui.theme.fontBlack
-import ba.kenan.myhabits.presentation.ui.theme.fontDarkGrey
-import ba.kenan.myhabits.presentation.ui.theme.fontGrey
 import ba.kenan.myhabits.presentation.utils.DevicesPreview
 import ba.kenan.myhabits.presentation.utils.calculateHabitStatistics
 import ba.kenan.myhabits.presentation.viewmodels.profile.ProfileUiState
@@ -148,8 +135,7 @@ private fun ProfileScreen(
             Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = profile.name,
-                style = MaterialTheme.typography.headlineSmall,
-                color = Color.Black
+                style = MaterialTheme.typography.headlineSmall
             )
         }
         Spacer(modifier = Modifier.height(40.dp))

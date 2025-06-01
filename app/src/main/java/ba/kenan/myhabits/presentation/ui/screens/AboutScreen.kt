@@ -11,13 +11,13 @@ import ba.kenan.myhabits.presentation.ui.theme.MyHabitsAppTheme
 import ba.kenan.myhabits.presentation.utils.DevicesPreview
 
 @Composable
-fun SettingsScreen(){
+fun AboutScreen(){
     Box(modifier = Modifier
         .fillMaxSize(),
         contentAlignment = Alignment.Center
     ){
         Text(
-            text = "Settings Screen",
+            text = "About Screen",
             style = MaterialTheme.typography.headlineLarge
         )
     }
@@ -25,8 +25,8 @@ fun SettingsScreen(){
 
 @DevicesPreview
 @Composable
-private fun SettinsScreenPreview() {
+private fun AboutScreenPreview() {
     MyHabitsAppTheme {
-        SettingsScreen()
+        AboutScreen()
     }
 }
