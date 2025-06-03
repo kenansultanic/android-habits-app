@@ -121,7 +121,7 @@ fun NavGraph(
             } else {
                 AddHabitScreen(
                     viewModel = hiltViewModel(),
-                    onHabitAdded = { navController.popBackStack() }
+                    navigateBack = { navController.popBackStack() }
                 )
             }
         }
@@ -141,7 +141,7 @@ fun NavGraph(
                 EditHabitScreen(
                     viewModel = hiltViewModel(),
                     habitId = habitId,
-                    onHabitEdited = { navController.popBackStack() }
+                    navigateBack = { navController.popBackStack() }
                 )
             }
         }

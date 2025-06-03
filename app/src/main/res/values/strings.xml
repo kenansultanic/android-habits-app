@@ -45,8 +45,8 @@
     <string name="delete_menu_item">Delete</string>
     <string name="three_dots">...</string>
     <string name="mark_as_done">Mark as done</string>
-    <string name="this_week_completions">This week: %1$ss completions</string>
-    <string name="this_month_completions">This month: %1$ss completions</string>
+    <string name="this_week_completions">This week: %1$s completions</string>
+    <string name="this_month_completions">This month: %1$s completions</string>
     <string name="daily_frequency_type">Daily</string>
     <string name="weekly_frequency_type">Weekly</string>
     <string name="custom_frequency_type">Custom</string>
@@ -63,6 +63,7 @@
     <string name="register_text_prompt">Register</string>
     <string name="already_have_an_account_text_prompt">"Already have an account? "</string>
     <string name="login_text_prompt">Login</string>
-    <string name="motivational_message">You know that %1$s fall hard on you - make a small step today. You can do this!</string>
+    <string name="motivational_message">You know that %1$s\'s fall hard on you - make a small step today. You can do this!</string>
     <string name="show_archived">Show archived</string>
+    <string name="about_app">MyHabits is a personal habit tracking app that helps you stay on track with your daily goals. Easily create and manage habits, track your progress over time, and stay motivated with daily reminders and visual statistics. Whether you\'re building new routines or breaking old ones, MyHabits is here to support your journey.</string>
 </resources>

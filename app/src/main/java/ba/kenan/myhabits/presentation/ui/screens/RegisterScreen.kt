@@ -50,13 +50,9 @@ fun RegisterScreen(
     var birthDateState by remember { mutableStateOf<Long?>(null) }
 
     when (uiState) {
-        is RegisterUiState.Loading -> {
-            LoadingComponent()
-        }
+        is RegisterUiState.Loading -> LoadingComponent()
 
-        is RegisterUiState.Success -> {
-            onRegisterButtonClick()
-        }
+        is RegisterUiState.Success -> onRegisterButtonClick()
 
         is RegisterUiState.Failure -> {
             Log.e("Register", "Registration error", (uiState as RegisterUiState.Failure).error)

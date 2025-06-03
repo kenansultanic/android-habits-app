@@ -6,18 +6,19 @@ import ba.kenan.myhabits.domain.repository.HabitRepository
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.Source
 import kotlinx.coroutines.tasks.await
 
 class HabitRepositoryImpl : HabitRepository {
     private val firestore = FirebaseFirestore.getInstance()
 
-    override suspend fun getHabitsForUser(userId: String): Result<List<Habit>> {
+    override suspend fun getHabitsForUser(userId: String, source: Source): Result<List<Habit>> {
         return try {
             val snapshot = firestore
                 .collection("users")
                 .document(userId)
                 .collection("habits")
-                .get()
+                .get(source)
                 .await()
 
             val habits = snapshot.documents.mapNotNull { doc ->
@@ -30,7 +31,7 @@ class HabitRepositoryImpl : HabitRepository {
                     .collection("habits")
                     .document(doc.id)
                     .collection("history")
-                    .get()
+                    .get(source)
                     .await()
 
                 val historyMap = historySnapshot.documents.associate { historyDoc ->

@@ -20,7 +20,7 @@ import com.google.firebase.Timestamp
 fun EditHabitScreen(
     viewModel: HomeViewModel,
     habitId: String,
-    onHabitEdited: () -> Unit,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -47,7 +47,7 @@ fun EditHabitScreen(
                                 )
                             )
                         )
-                        onHabitEdited()
+                        navigateBack()
                     },
                     modifier = modifier
                 )
@@ -57,6 +57,7 @@ fun EditHabitScreen(
         }
         is HomeUiState.Error -> {
             Log.e("EditHabit", "Greška pri dohvatanju navike", (uiState as HomeUiState.Error).error)
+            navigateBack()
         }
         HomeUiState.Init -> LoadingComponent()
     }

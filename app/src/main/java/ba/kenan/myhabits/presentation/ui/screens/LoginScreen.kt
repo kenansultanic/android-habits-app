@@ -47,13 +47,9 @@ fun LoginScreen(
     var passwordState by remember { mutableStateOf(TextFieldValue("")) }
 
     when (uiState) {
-        is LoginUiState.Loading -> {
-            LoadingComponent()
-        }
+        is LoginUiState.Loading -> LoadingComponent()
 
-        is LoginUiState.Success -> {
-            onLoginButtonClick()
-        }
+        is LoginUiState.Success -> onLoginButtonClick()
 
         is LoginUiState.Failure -> {
             Log.e("Login", "Login error: ", (uiState as LoginUiState.Failure).error)

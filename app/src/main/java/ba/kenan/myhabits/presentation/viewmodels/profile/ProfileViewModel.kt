@@ -3,9 +3,11 @@ package ba.kenan.myhabits.presentation.viewmodels.profile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ba.kenan.myhabits.domain.model.Habit
+import ba.kenan.myhabits.domain.network.NetworkStatusProvider
 import ba.kenan.myhabits.domain.repository.ProfileRepository
 import ba.kenan.myhabits.presentation.utils.SnackbarController
 import ba.kenan.myhabits.presentation.utils.SnackbarEvent
+import com.google.firebase.firestore.Source
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,27 +21,37 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val repository: ProfileRepository,
-    private val snackbarController: SnackbarController
+    private val snackbarController: SnackbarController,
+    private val networkStatusProvider: NetworkStatusProvider
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<ProfileUiState>(ProfileUiState.Loading)
     val uiState: StateFlow<ProfileUiState> = _uiState
 
     fun loadProfile(userId: String) {
+        val source = if (networkStatusProvider.isOffline()) Source.CACHE else Source.DEFAULT
         viewModelScope.launch {
             _uiState.value = ProfileUiState.Loading
-            val result = repository.getUserProfile(userId)
-            _uiState.value = result.fold(
-                onSuccess = { ProfileUiState.Success(it) },
-                onFailure = {
-                    snackbarController.sendEvent(
-                        SnackbarEvent(message = it.message ?: "Unknown error")
-                    )
-                    ProfileUiState.Error(it)
-                }
-            )
+            try {
+                val result = repository.getUserProfile(userId, source)
+                _uiState.value = result.fold(
+                    onSuccess = { ProfileUiState.Success(it) },
+                    onFailure = {
+                        snackbarController.sendEvent(
+                            SnackbarEvent(message = it.message ?: "Unknown error")
+                        )
+                        ProfileUiState.Error(it)
+                    }
+                )
+            } catch (e: Exception) {
+                snackbarController.sendEvent(
+                    SnackbarEvent(message = e.message ?: "Unexpected error occurred")
+                )
+                _uiState.value = ProfileUiState.Error(e)
+            }
         }
     }
+
 
     fun shouldShowMotivation(habits: List<Habit>, streakFailLimit: Int = 3): Boolean {
         val today = LocalDate.now()

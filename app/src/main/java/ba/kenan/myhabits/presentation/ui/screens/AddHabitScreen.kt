@@ -15,7 +15,7 @@ import ba.kenan.myhabits.presentation.viewmodels.home.HomeViewModel
 @Composable
 fun AddHabitScreen(
     viewModel: HomeViewModel,
-    onHabitAdded: () -> Unit,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -23,11 +23,12 @@ fun AddHabitScreen(
     when (uiState) {
         is HomeUiState.Error -> {
             Log.e("AddHabit", "Greška pri dodavanju navike", (uiState as HomeUiState.Error).error)
+            navigateBack()
         }
         else -> {
             AddHabitScreen(onHabitAdded = {
                 viewModel.addHabit(it.name, it.tags, it.frequencyType, it.frequencyDays)
-                onHabitAdded()
+                navigateBack()
             }, modifier = modifier)
         }
     }

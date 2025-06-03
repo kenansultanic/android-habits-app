@@ -5,13 +5,14 @@ import ba.kenan.myhabits.domain.model.Habit
 import ba.kenan.myhabits.domain.model.UserProfile
 import ba.kenan.myhabits.domain.repository.ProfileRepository
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import kotlinx.coroutines.tasks.await
 import java.util.Date
 
 class ProfileRepositoryImpl : ProfileRepository {
     private val firestore = FirebaseFirestore.getInstance()
 
-    override suspend fun getUserProfile(userId: String): Result<UserProfile> = try {
+    override suspend fun getUserProfile(userId: String, source: Source): Result<UserProfile> = try {
         val userSnapshot = firestore.collection("users").document(userId).get().await()
 
         val name = userSnapshot.getString("name") ?: ""
@@ -24,7 +25,7 @@ class ProfileRepositoryImpl : ProfileRepository {
             .collection("users")
             .document(userId)
             .collection("habits")
-            .get()
+            .get(source)
             .await()
 
         val habits = habitsSnapshot.documents.mapNotNull { doc ->
@@ -48,7 +49,7 @@ class ProfileRepositoryImpl : ProfileRepository {
                 .collection("habits")
                 .document(id)
                 .collection("history")
-                .get()
+                .get(source)
                 .await()
 
             val historyMap = historySnapshot.documents.associate { historyDoc ->
