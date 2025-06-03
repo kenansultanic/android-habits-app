@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.TimeZone
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
@@ -34,9 +35,11 @@ class RegisterViewModel @Inject constructor(
             _uiState.value = result.fold(
                 onSuccess = { RegisterUiState.Success },
                 onFailure = {
-                    snackbarController.sendEvent(
-                        SnackbarEvent(message = it.message ?: "Unknown error")
-                    )
+                    if (it !is CancellationException) {
+                        snackbarController.sendEvent(
+                            SnackbarEvent(message = it.message ?: "Unknown error")
+                        )
+                    }
                     RegisterUiState.Failure(it)
                 }
             )
