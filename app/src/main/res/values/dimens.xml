@@ -32,7 +32,7 @@
 
     <!-- Padding -->
     <dimen name="padding_default">16dp</dimen>
-    <dimen name="padding_medium">24dp</dimen>
+    <dimen name="padding_medium">20dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="top_padding">88dp</dimen>
     <dimen name="padding_xsmall">4dp</dimen>

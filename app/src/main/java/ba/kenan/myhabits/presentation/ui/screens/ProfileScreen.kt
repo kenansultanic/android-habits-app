@@ -1,7 +1,6 @@
 package ba.kenan.myhabits.presentation.ui.screens
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ba.kenan.myhabits.R
 import ba.kenan.myhabits.domain.model.Frequency
@@ -81,14 +79,12 @@ fun ProfileScreen(
             LaunchedEffect(Unit) {
                 if (!hasShownMotivation && viewModel.shouldShowMotivation(profile.habits)) {
                     hasShownMotivation = true
-                    Toast.makeText(
-                        context,
-                        context.getString(
+                    viewModel.sendMotivationalSnackbar(
+                        message =  context.getString(
                             R.string.motivational_message,
                             today.dayOfWeek.name.lowercase().replaceFirstChar { it.uppercase() }
-                        ),
-                        Toast.LENGTH_LONG
-                    ).show()
+                        )
+                    )
                 }
             }
 

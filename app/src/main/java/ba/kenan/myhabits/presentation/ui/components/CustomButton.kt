@@ -18,21 +18,18 @@ fun CustomButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isEnabled: Boolean = true,
-    shape: RoundedCornerShape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner)),
-    textStyle: TextStyle = MaterialTheme.typography.labelLarge,
-    contentPadding: PaddingValues = PaddingValues(dimensionResource(R.dimen.padding_medium))
+    isEnabled: Boolean = true
 ) {
     Button(
         onClick = onClick,
         enabled = isEnabled,
-        shape = shape,
-        contentPadding = contentPadding,
+        shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner)),
+        contentPadding = PaddingValues(dimensionResource(R.dimen.padding_medium)),
         modifier = modifier
     ) {
         Text(
             text = text,
-            style = textStyle
+            style =  MaterialTheme.typography.labelLarge
         )
     }
 }

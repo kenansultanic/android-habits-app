@@ -79,7 +79,7 @@ fun CustomDatePicker(
             Icon(
                 imageVector = Icons.Default.DateRange,
                 contentDescription = stringResource(R.string.calendar_icon),
-                tint = lightGrey,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(id = R.dimen.padding_default),
                     vertical = dimensionResource(id = R.dimen.padding_default)
@@ -87,13 +87,13 @@ fun CustomDatePicker(
             )
             Text(
                 text = selectedDate.ifEmpty { textFieldPlaceholder },
-                style = MaterialTheme.typography.headlineMedium.copy(color = lightGrey)
+                style = MaterialTheme.typography.headlineMedium
             )
             Spacer(modifier = Modifier.weight(1f))
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = stringResource(R.string.date_pick_arrow),
-                tint = lightGrey,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(end = dimensionResource(id = R.dimen.padding_default))
             )
         }

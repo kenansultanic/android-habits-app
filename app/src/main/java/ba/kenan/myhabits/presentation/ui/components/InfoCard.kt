@@ -33,9 +33,11 @@ fun InfoCard(
     Text(
         text = title,
         style = MaterialTheme.typography.titleMedium,
-        modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium_large))
+        modifier = Modifier.padding(
+            vertical = dimensionResource(id = R.dimen.padding_small),
+            horizontal = dimensionResource(id = R.dimen.padding_medium)
+        )
     )
-    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.height_large) / 2))
     Card(
         modifier = Modifier
             .fillMaxWidth()

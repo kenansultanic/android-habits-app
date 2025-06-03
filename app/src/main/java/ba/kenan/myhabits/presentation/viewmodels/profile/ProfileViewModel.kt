@@ -71,4 +71,12 @@ class ProfileViewModel @Inject constructor(
             recentFailures
         }
     }
+
+    fun sendMotivationalSnackbar(message: String) {
+        viewModelScope.launch {
+            snackbarController.sendEvent(
+                SnackbarEvent(message)
+            )
+        }
+    }
 }

@@ -64,4 +64,5 @@
     <string name="already_have_an_account_text_prompt">"Already have an account? "</string>
     <string name="login_text_prompt">Login</string>
     <string name="motivational_message">You know that %1$s fall hard on you - make a small step today. You can do this!</string>
+    <string name="show_archived">Show archived</string>
 </resources>
