@@ -45,8 +45,8 @@
     <string name="delete_menu_item">Delete</string>
     <string name="three_dots">...</string>
     <string name="mark_as_done">Mark as done</string>
-    <string name="this_week_completions">This week: %1$s completions</string>
-    <string name="this_month_completions">This month: %1$s completions</string>
+    <string name="this_week_completions">This week: %1$ss completions</string>
+    <string name="this_month_completions">This month: %1$ss completions</string>
     <string name="daily_frequency_type">Daily</string>
     <string name="weekly_frequency_type">Weekly</string>
     <string name="custom_frequency_type">Custom</string>

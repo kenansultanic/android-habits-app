@@ -27,26 +27,3 @@ private fun calculateCurrentStreak(dates: Set<String>): Int {
     }
     return streak
 }
-
-private fun estimateExpectedCompletions(habits: List<Habit>): Int {
-    val today = LocalDate.now()
-    var count = 0
-
-    habits.forEach { habit ->
-        val start = habit.createdAt.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-        val days = generateSequence(start) { it.plusDays(1) }
-            .takeWhile { !it.isAfter(today) }
-            .filter { date ->
-                val dayOfWeek = date.dayOfWeek.value % 7
-                when (habit.frequency.type.lowercase()) {
-                    "daily" -> true
-                    "weekly" -> habit.frequency.days.firstOrNull() == dayOfWeek
-                    "custom" -> habit.frequency.days.contains(dayOfWeek)
-                    else -> false
-                }
-            }
-            .toList()
-        count += days.size
-    }
-    return count
-}
