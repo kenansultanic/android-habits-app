@@ -7,6 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import ba.kenan.myhabits.presentation.ui.theme.MyHabitsAppTheme
+import ba.kenan.myhabits.presentation.utils.DevicesPreview
 
 @Composable
 fun SettingsScreen(){
@@ -18,5 +20,13 @@ fun SettingsScreen(){
             text = "Settings Screen",
             style = MaterialTheme.typography.headlineLarge
         )
+    }
+}
+
+@DevicesPreview
+@Composable
+private fun SettinsScreenPreview() {
+    MyHabitsAppTheme {
+        SettingsScreen()
     }
 }

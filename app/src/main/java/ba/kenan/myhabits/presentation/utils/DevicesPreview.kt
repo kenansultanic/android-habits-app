@@ -5,7 +5,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(
     name = "phone",
     showSystemUi = true,
-    device = "spec:shape=Normal,width=360,height=640,unit=dp,dpi=480"
+    device = "spec:width=360dp,height=640dp,dpi=480"
 )
 @Preview(
     name = "pixel6",
@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(
     name = "tablet",
     showSystemUi = true,
-    device = "spec:shape=Normal,width=800,height=1280,unit=dp,dpi=480"
+    device = "spec:width=800dp,height=1280dp,dpi=480"
 )
 @Preview(
     name = "fold",
