@@ -2,11 +2,8 @@ package ba.kenan.myhabits.presentation.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,19 +35,19 @@ fun HabitForm(
     var frequencyDays by remember { mutableStateOf(initialFrequencyDays.map { it.toString() }) }
 
     val frequencyTypeOptions = listOf(
-        DropdownItem("daily", "Daily"),
-        DropdownItem("weekly", "Weekly"),
-        DropdownItem("custom", "Custom")
+        DropdownItem("daily", stringResource(R.string.daily_frequency_type)),
+        DropdownItem("weekly", stringResource(R.string.weekly_frequency_type)),
+        DropdownItem("custom", stringResource(R.string.custom_frequency_type))
     )
 
     val dayOptions = listOf(
-        DropdownItem("0", "Sunday"),
-        DropdownItem("1", "Monday"),
-        DropdownItem("2", "Tuesday"),
-        DropdownItem("3", "Wednesday"),
-        DropdownItem("4", "Thursday"),
-        DropdownItem("5", "Friday"),
-        DropdownItem("6", "Saturday")
+        DropdownItem("0", stringResource(R.string.sunday)),
+        DropdownItem("1", stringResource(R.string.monday)),
+        DropdownItem("2", stringResource(R.string.tuesday)),
+        DropdownItem("3", stringResource(R.string.wednesday)),
+        DropdownItem("4", stringResource(R.string.thursday)),
+        DropdownItem("5", stringResource(R.string.friday)),
+        DropdownItem("6", stringResource(R.string.saturday))
     )
 
     LaunchedEffect(frequencyType) {
@@ -86,7 +83,9 @@ fun HabitForm(
                 items = frequencyTypeOptions,
                 selectedItemValue = frequencyTypeOptions.find { it.id == frequencyType }?.name,
                 selectItemId = { frequencyType = it },
-                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp)
             )
 
             when (frequencyType) {
@@ -96,7 +95,9 @@ fun HabitForm(
                         items = dayOptions,
                         selectedItemValue = dayOptions.find { it.id == frequencyDays.firstOrNull() }?.name,
                         selectItemId = { frequencyDays = listOf(it) },
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)
                     )
                 }
 
@@ -106,7 +107,9 @@ fun HabitForm(
                         items = dayOptions,
                         selectedIds = frequencyDays,
                         onSelectionChange = { frequencyDays = it },
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)
                     )
                 }
 

@@ -24,7 +24,7 @@
     <!-- Icon -->
     <dimen name="icon_size_large">140dp</dimen>
     <dimen name="icon_size_xxlarge">64dp</dimen>
-    <dimen name="icon_size_medium">40dp</dimen>
+    <dimen name="padding_xlarge">40dp</dimen>
     <dimen name="icon_size_small">32dp</dimen>
     <dimen name="icon_size_xsmall">24dp</dimen>
     <dimen name="icon_size_xxsmall">8dp</dimen>
@@ -36,11 +36,11 @@
     <dimen name="padding_small">8dp</dimen>
     <dimen name="top_padding">88dp</dimen>
     <dimen name="padding_xsmall">4dp</dimen>
-    <dimen name="start_padding">32dp</dimen>
+    <dimen name="padding_large">32dp</dimen>
     <dimen name="padding_horizontal_medium">16dp</dimen>
     <dimen name="padding_vertical_medium">20dp</dimen>
     <dimen name="padding_vertical_default">10dp</dimen>
-    <dimen name="padding_horizontal_xmedium">28dp</dimen>
+    <dimen name="padding_medium_large">28dp</dimen>
     <dimen name="padding_smallxx">12dp</dimen>
 
     <!-- Component -->
@@ -83,11 +83,12 @@
     <dimen name="small_button_height">34dp</dimen>
     <dimen name="small_button_width">62dp</dimen>
     <dimen name="rounded_corner">8dp</dimen>
+    <dimen name="rounded_corner_small">4dp</dimen>
+    <dimen name="rounded_corner_large">12dp</dimen>
     <dimen name="box_width">290dp</dimen>
     <dimen name="box_height">472dp</dimen>
     <dimen name="text_field_height">48dp</dimen>
     <dimen name="shadow_default">4dp</dimen>
     <dimen name="offset_default">16dp</dimen>
     <dimen name="shadow_small">4dp</dimen>
-    <dimen name="rounded_corner_small">4dp</dimen>
 </resources>

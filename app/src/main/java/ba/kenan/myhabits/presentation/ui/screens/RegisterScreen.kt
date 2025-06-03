@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -103,7 +105,12 @@ private fun RegisterScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(start = 32.dp, top = 40.dp, end = 32.dp),
+            .verticalScroll(rememberScrollState())
+            .padding(
+                start = dimensionResource(R.dimen.padding_large),
+                top = dimensionResource(R.dimen.padding_xlarge),
+                end = dimensionResource(R.dimen.padding_large)
+            ),
     ) {
         Text(
             text = stringResource(R.string.myhabits),
@@ -127,39 +134,39 @@ private fun RegisterScreen(
             text = name,
             placeholder = stringResource(R.string.full_name_placeholder),
             onTextValueChange = onNameValueChange,
-            modifier = Modifier.padding(vertical = 4.dp)
+            modifier = Modifier.padding(vertical = dimensionResource(R.dimen.padding_xsmall))
         )
         CustomTextField(
             text = email,
             placeholder = stringResource(R.string.email_placeholder),
             onTextValueChange = onEmailValueChange,
-            modifier = Modifier.padding(vertical = 4.dp)
+            modifier = Modifier.padding(vertical = dimensionResource(R.dimen.padding_xsmall))
         )
         CustomTextField(
             text = password,
             password = true,
             placeholder = stringResource(R.string.password_placeholder),
             onTextValueChange = onPasswordValueChange,
-            modifier = Modifier.padding(vertical = 4.dp)
+            modifier = Modifier.padding(vertical = dimensionResource(R.dimen.padding_xsmall))
         )
         CustomDatePicker(
             selectedDateMillis = birthday,
             textFieldPlaceholder = stringResource(R.string.date_of_birth_placeholder),
             setSelectedDate = onBirthdayValueChange,
-            modifier = Modifier.padding(vertical = 4.dp)
+            modifier = Modifier.padding(vertical = dimensionResource(R.dimen.padding_xsmall))
         )
         CustomButton(
             text = stringResource(R.string.register_button),
             onClick = onRegisterButtonClick,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 4.dp)
+                .padding(vertical = dimensionResource(R.dimen.padding_xsmall))
         )
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_xxxmedium)))
         ClickableTextPrompt(
             onTextClick = navigateToLogin,
-            firstText = "Already have an account? ",
-            secondText = "Login",
+            firstText = stringResource(R.string.already_have_an_account_text_prompt),
+            secondText = stringResource(R.string.login_text_prompt),
             tag = "LOGIN",
             annotation = "login"
         )

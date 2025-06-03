@@ -17,9 +17,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ba.kenan.myhabits.R
 import ba.kenan.myhabits.presentation.ui.theme.MyHabitsAppTheme
 import ba.kenan.myhabits.presentation.ui.theme.fontGrey
 
@@ -31,22 +33,25 @@ fun InfoCard(
     Text(
         text = title,
         style = MaterialTheme.typography.titleMedium,
-        modifier = Modifier.padding(start = 28.dp, top = 28.dp)
+        modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium_large))
     )
-    Spacer(modifier = Modifier.height(12.dp))
+    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.height_large) / 2))
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 24.dp),
-        shape = RoundedCornerShape(12.dp),
+            .padding(
+                vertical = dimensionResource(id = R.dimen.padding_xsmall),
+                horizontal = dimensionResource(id = R.dimen.padding_medium)
+            ),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_large)),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_default))) {
             items.forEachIndexed { index, (label, value) ->
                 InfoItem(label, value)
                 if (index < items.size - 1) {
                     HorizontalDivider(
-                        modifier = Modifier.padding(vertical = 8.dp),
+                        modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_default) / 2),
                         thickness = 0.7.dp,
                         color = fontGrey.copy(alpha = 0.4f)
                     )
@@ -84,7 +89,9 @@ private fun InfoItem(label: String, value: String) {
 @Composable
 private fun InfoCardPreview() {
     MyHabitsAppTheme {
-        Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)) {
             InfoCard(
                 title = "Information",
                 items = listOf(

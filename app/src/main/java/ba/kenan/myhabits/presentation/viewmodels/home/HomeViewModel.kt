@@ -54,7 +54,12 @@ class HomeViewModel @Inject constructor(
             val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@launch
             val result = repository.addHabit(uid, name, tags, frequencyType, frequencyDays)
             result.fold(
-                onSuccess = { loadHabits() },
+                onSuccess = {
+                    loadHabits()
+                    snackbarController.sendEvent(
+                        SnackbarEvent(message = "New habit added.")
+                    )
+                },
                 onFailure = {
                     snackbarController.sendEvent(
                         SnackbarEvent(it.message ?: "Couldn't add habit.")
@@ -78,7 +83,12 @@ class HomeViewModel @Inject constructor(
                 isArchived = habit.isArchived
             )
             result.fold(
-                onSuccess = { loadHabits() },
+                onSuccess = {
+                    loadHabits()
+                    snackbarController.sendEvent(
+                        SnackbarEvent(message = "Habit updated.")
+                    )
+                },
                 onFailure = {
                     snackbarController.sendEvent(
                         SnackbarEvent(it.message ?: "Couldn't update habit.")
@@ -94,7 +104,12 @@ class HomeViewModel @Inject constructor(
             val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@launch
             val result = repository.deleteHabit(uid, habitId)
             result.fold(
-                onSuccess = { loadHabits() },
+                onSuccess = {
+                    loadHabits()
+                    snackbarController.sendEvent(
+                        SnackbarEvent(message = "Habit deleted.")
+                    )
+                },
                 onFailure = {
                     snackbarController.sendEvent(
                         SnackbarEvent(it.message ?: "Couldn't delete habit.")
@@ -114,7 +129,12 @@ class HomeViewModel @Inject constructor(
 
             val result = repository.getHabitsForUser(userId)
             _uiState.value = result.fold(
-                onSuccess = { HomeUiState.Success(it.toList()) },
+                onSuccess = {
+                    snackbarController.sendEvent(
+                        SnackbarEvent(message = "Habit completed")
+                    )
+                    HomeUiState.Success(it.toList())
+                },
                 onFailure = {
                     snackbarController.sendEvent(
                         SnackbarEvent(message = it.message ?: "Unknown error")

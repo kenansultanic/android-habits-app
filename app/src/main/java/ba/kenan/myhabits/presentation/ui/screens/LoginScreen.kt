@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -90,7 +92,12 @@ private fun LoginForm(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(start = 32.dp, top = 40.dp, end = 32.dp),
+            .verticalScroll(rememberScrollState())
+            .padding(
+                start = dimensionResource(R.dimen.padding_large),
+                top = dimensionResource(R.dimen.padding_xlarge),
+                end = dimensionResource(R.dimen.padding_large)
+            ),
     ) {
         Text(
             text = stringResource(R.string.myhabits),
@@ -121,20 +128,20 @@ private fun LoginForm(
             password = true,
             placeholder = stringResource(R.string.password_placeholder),
             onTextValueChange = onPasswordValueChange,
-            modifier = Modifier.padding(vertical = 4.dp)
+            modifier = Modifier.padding(vertical = dimensionResource(R.dimen.padding_xsmall))
         )
         CustomButton(
             text = stringResource(R.string.login_button),
             onClick = onLoginButtonClick,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 4.dp)
+                .padding(vertical = dimensionResource(R.dimen.padding_xsmall))
         )
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_xxxmedium)))
         ClickableTextPrompt(
             onTextClick = navigateToRegistration,
-            firstText = "Don't have an account? ",
-            secondText = "Register",
+            firstText = stringResource(R.string.don_t_have_an_account_text_prompt),
+            secondText = stringResource(R.string.register_text_prompt),
             tag = "REGISTER",
             annotation = "register"
         )

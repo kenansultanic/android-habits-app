@@ -20,8 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ba.kenan.myhabits.R
 import ba.kenan.myhabits.domain.model.Frequency
 import ba.kenan.myhabits.domain.model.Habit
 import ba.kenan.myhabits.domain.model.UserProfile
@@ -60,6 +63,7 @@ fun ProfileScreen(
         is ProfileUiState.Error -> {
             Log.e("Profile", "Failed to load profile", (uiState as ProfileUiState.Error).error)
         }
+
         is ProfileUiState.Success -> {
             val profile = (uiState as ProfileUiState.Success).profile
 
@@ -79,7 +83,10 @@ fun ProfileScreen(
                     hasShownMotivation = true
                     Toast.makeText(
                         context,
-                        "Znaš da ti ${today.dayOfWeek.name.lowercase().replaceFirstChar { it.uppercase() }} teško padaju - danas napravi mali korak. Možeš ti to!",
+                        context.getString(
+                            R.string.motivational_message,
+                            today.dayOfWeek.name.lowercase().replaceFirstChar { it.uppercase() }
+                        ),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -125,21 +132,21 @@ private fun ProfileScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.small_height)))
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
             ImageBox(initials = initials)
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.height_large)/2))
             Text(
                 text = profile.name,
                 style = MaterialTheme.typography.headlineSmall
             )
         }
-        Spacer(modifier = Modifier.height(32.dp))
-        InfoCard(title = "Information", items = informationItems)
-        InfoCard(title = "Statistics", items = statisticsItems)
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.small_height)))
+        InfoCard(title = stringResource(R.string.information), items = informationItems)
+        InfoCard(title = stringResource(R.string.statistics), items = statisticsItems)
     }
 }
 
@@ -165,6 +172,11 @@ private fun ProfileScreenPreview() {
                 )
             )
         )
-        ProfileScreen(profile = previewProfile, initials = "KS", age = "24", joinedOn = "09/05/2025")
+        ProfileScreen(
+            profile = previewProfile,
+            initials = "KS",
+            age = "24",
+            joinedOn = "09/05/2025"
+        )
     }
 }

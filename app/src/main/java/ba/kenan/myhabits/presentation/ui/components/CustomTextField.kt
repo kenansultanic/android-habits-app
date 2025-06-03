@@ -63,16 +63,11 @@ fun CustomTextField(
             },
             trailingIcon = {
                 if (password) {
-                    val icon =
-                        if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff
-                    val description =
-                        if (passwordVisible) stringResource(R.string.hide_password) else stringResource(
-                            R.string.show_password
-                        )
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
-                            imageVector = icon,
-                            contentDescription = description,
+                            imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                            contentDescription = if (passwordVisible) stringResource(R.string.hide_password_content_description)
+                                else stringResource(R.string.show_password_content_description),
                             tint = textFieldUnfocused
                         )
                     }

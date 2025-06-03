@@ -5,7 +5,7 @@
     <dimen name="spacing_xxlarge">315dp</dimen>
     <dimen name="spacing_medium">54dp</dimen>
     <dimen name="spacing_xmedium">90dp</dimen>
-    <dimen name="spacing_xxmedium">72dp</dimen>
+    <dimen name="spacing_xxmedium">90dp</dimen>
     <dimen name="spacing_xxxmedium">98dp</dimen>
     <dimen name="spacing_xxsmall">18dp</dimen>
     <dimen name="spacing_xsmall">27dp</dimen>
@@ -24,23 +24,23 @@
     <!-- Icon -->
     <dimen name="icon_size_large">315dp</dimen>
     <dimen name="icon_size_xxlarge">144dp</dimen>
-    <dimen name="icon_size_medium">90dp</dimen>
+    <dimen name="padding_xlarge">90dp</dimen>
     <dimen name="icon_size_small">72dp</dimen>
     <dimen name="icon_size_xsmall">24dp</dimen>
     <dimen name="icon_size_xxsmall">18dp</dimen>
     <dimen name="icon_size_xxxsmall">5dp</dimen>
 
     <!-- Padding -->
-    <dimen name="padding_default">36dp</dimen>
+    <dimen name="padding_default">22dp</dimen>
     <dimen name="padding_small">18dp</dimen>
-    <dimen name="padding_medium">54dp</dimen>
+    <dimen name="padding_medium">24dp</dimen>
     <dimen name="top_padding">198dp</dimen>
     <dimen name="padding_xsmall">9dp</dimen>
-    <dimen name="start_padding">72dp</dimen>
+    <dimen name="padding_large">72dp</dimen>
     <dimen name="padding_horizontal_medium">16dp</dimen>
     <dimen name="padding_vertical_medium">20dp</dimen>
     <dimen name="padding_vertical_default">22dp</dimen>
-    <dimen name="padding_horizontal_xmedium">63dp</dimen>
+    <dimen name="padding_medium_large">63dp</dimen>
     <dimen name="padding_smallxx">18dp</dimen>
 
     <!-- Component -->
@@ -82,8 +82,9 @@
     <dimen name="button_padding">36dp</dimen>
     <dimen name="small_button_height">76dp</dimen>
     <dimen name="small_button_width">140dp</dimen>
-    <dimen name="rounded_corner">18dp</dimen>
+    <dimen name="rounded_corner">12dp</dimen>
     <dimen name="rounded_corner_small">4dp</dimen>
+    <dimen name="rounded_corner_large">12dp</dimen>
     <dimen name="box_width">652dp</dimen>
     <dimen name="box_height">1062dp</dimen>
     <dimen name="text_field_height">108dp</dimen>

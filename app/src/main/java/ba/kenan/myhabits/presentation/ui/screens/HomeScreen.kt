@@ -163,7 +163,7 @@ private fun HomeScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Show completed",
+                    text = stringResource(R.string.show_completed),
                     modifier = Modifier.weight(1f),
                     style = MaterialTheme.typography.bodyLarge
                 )
@@ -241,36 +241,42 @@ private fun HabitCard(
                     Text(
                         text =
                             if (habit.isArchived)
-                                "Archived"
-                            else if (alreadyCompleted || !isActiveToday) "Completed"
-                            else "Not completed",
+                                stringResource(R.string.archived)
+                            else if (alreadyCompleted || !isActiveToday) stringResource(R.string.completed)
+                            else stringResource(R.string.not_completed),
                         style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
                     )
                 }
                 Box {
                     IconButton(onClick = { menuExpanded = true }) {
-                        Icon(imageVector = Icons.Default.MoreVert, contentDescription = "Options")
+                        Icon(imageVector = Icons.Default.MoreVert, contentDescription = stringResource(
+                            R.string.options_content_description
+                        )
+                        )
                     }
                     DropdownMenu(
                         expanded = menuExpanded,
                         onDismissRequest = { menuExpanded = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text("Edit") },
+                            text = { Text(stringResource(R.string.edit_menu_item)) },
                             onClick = {
                                 onUpdate(habit)
                                 menuExpanded = false
                             }
                         )
                         DropdownMenuItem(
-                            text = { Text(if (habit.isArchived) "Unarchive" else "Archive") },
+                            text = { Text(if (habit.isArchived) stringResource(R.string.unarchive_menu_item) else stringResource(
+                                R.string.archive_menu_item
+                            )
+                            ) },
                             onClick = {
                                 onArchive(habit)
                                 menuExpanded = false
                             }
                         )
                         DropdownMenuItem(
-                            text = { Text("Delete") },
+                            text = { Text(stringResource(R.string.delete_menu_item)) },
                             onClick = {
                                 onDelete(habit)
                                 menuExpanded = false
@@ -293,7 +299,7 @@ private fun HabitCard(
                 if (hasHiddenTags && !expanded) {
                     AssistChip(
                         onClick = { expanded = true },
-                        label = { Text("...") }
+                        label = { Text(stringResource(R.string.three_dots)) }
                     )
                 }
             }
@@ -303,7 +309,7 @@ private fun HabitCard(
                     onClick = { onMarkAsCompleted(habit.id) },
                     modifier = Modifier
                 ) {
-                    Text("Mark as done")
+                    Text(stringResource(R.string.mark_as_done))
                 }
             }
             AnimatedVisibility(visible = expanded) {
@@ -322,12 +328,12 @@ private fun HabitCard(
 
                 Column(modifier = Modifier.padding(top = 12.dp)) {
                     Text(
-                        text = "This week: $weeklyCompletions completions",
+                        text = stringResource(R.string.this_week_completions, weeklyCompletions),
                         style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(R.dimen.height_small)))
                     Text(
-                        text = "This month: $monthlyCompletions completions",
+                        text = stringResource(R.string.this_month_completions, monthlyCompletions),
                         style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
                     )
                 }

@@ -19,8 +19,8 @@ fun CustomButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    shape: RoundedCornerShape = RoundedCornerShape(dimensionResource(R.dimen.icon_size_xxsmall)),
-    textStyle: TextStyle = MaterialTheme.typography.headlineLarge,
+    shape: RoundedCornerShape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner)),
+    textStyle: TextStyle = MaterialTheme.typography.labelLarge,
     contentPadding: PaddingValues = PaddingValues(dimensionResource(R.dimen.padding_medium))
 ) {
     Button(
